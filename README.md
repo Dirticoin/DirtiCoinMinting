@@ -1,15 +1,8 @@
-[![banner](https://i.ibb.co/BqjcRGG/JoyStick-DAO-Github-Contracts-Banner.png)](https://www.joystick.xyz/)
-
-# [![codecov](https://codecov.io/gh/JoyStickDAO/contracts-v2/branch/main/graph/badge.svg?token=XNGL2Z8CBE)](https://codecov.io/gh/JoyStickDAO/contracts-v2) ![build&tests](https://github.com/JoyStickDAO/contracts-v2/actions/workflows/ci-config.yml/badge.svg) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-
-# JoyStickDAO Smart Contracts v1
-
-This repo contains the smart contracts making up JoyStickDAO.
+# DirtiCoin Smart Contracts v1
 
 Repository is organized as follows:
 
 - `/contracts/test/`- contracts used for tests.
-- `/contracts/seed/`- JoyStick Launch seed module contracts.
 - `/contracts/utils/`- utility contracts.
 - `/docs/`- additional documentation.
 
@@ -124,30 +117,3 @@ to verify contracts, the enviornment variable should contain `ETHERSCAN_API_KEY`
 
 single constructor argument can be passed as follows:
 `npx hardhat verify --network mainnet <0xsome_contract_address> "Constructor argument 1"`
-
-multiple constructor arguments can be passed as follows:
-`npx hardhat verify --network rinkeby 0xa1C2eab7286dB99F481682e8165d2F1F61C4D7Ad "JoyStickDAO Rating Reputation" "PRR"`
-
-find more information in the documentation of [hardhat-etherscan](https://hardhat.org/plugins/nomiclabs-hardhat-etherscan.html)
-
-## Code formatting
-
-To format JS and Solidity code, run the following command:
-
-`npm run format`
-
-## Contributing to JoyStickDAO
-
-If you wish to contribute to JoyStickDAO, check out our [Contributor Onboarding documentation](https://docs.primedao.io/primedao/call-for-contributors).
-
-## License
-
-```
-Copyright 2020 JoyStick Foundation
-
-Licensed under the GNU General Public License v3.0.
-You may obtain a copy of this license at:
-
-https://www.gnu.org/licenses/gpl-3.0.en.html
-
-```
