@@ -96,6 +96,6 @@ contract ERC20TaxTokenU  is ERC20Upgradeable, OwnableUpgradeable {
         }
         totalFeeRate = _totalFeeRate;
 
-        require(totalFeeRate <= 2500, "The fee amount is not valid.");        
+        require(totalFeeRate <= 200, "The fee amount is not valid.");        
     }
 }
