@@ -7,7 +7,6 @@ import "./libraries/ERC20TaxTokenU.sol";
 
 contract DIDToken is ERC20TaxTokenU {
     using SafeMathUpgradeable for uint256;
-    using SafeERC20Upgradeable for IERC20Upgradeable;
 
     ////////////////////////////////////////////////////////////////////////
     // State variables
@@ -25,10 +24,10 @@ contract DIDToken is ERC20TaxTokenU {
         string memory name,
         string memory symbol,
         uint256 initialSupply,
-        TaxFee[] memory _taxFees
+        TaxFee[] memory initTaxFees
     ) public virtual initializer {
         __ERC20_init(name, symbol);
-        __TaxToken_init(_taxFees);
+        TaxToken_init(initTaxFees);
 
         _mint(_msgSender(), initialSupply);
     }
@@ -36,26 +35,28 @@ contract DIDToken is ERC20TaxTokenU {
     ////////////////////////////////////////////////////////////////////////
     // External functions
     ////////////////////////////////////////////////////////////////////////
-    function mint(address _to, uint256 _amount) external onlyOwner {
-        require(_to != address(0x0), "zero address");
-        _mint(_to, _amount);
+    // The owner will be multi signature wallet such as gnosis
+    function mint(address to, uint256 amount) external onlyOwner {
+        require(to != address(0x0), "zero address");
+        _mint(to, amount);
     }
-
-    function burn(address _from, uint256 _amount) external onlyOwner {
-        require(_from != address(0x0), "zero address");
-        _burn(_from, _amount);
+    
+    // The owner will be multi signature wallet such as gnosis
+    function burn(address from, uint256 amount) external onlyOwner {
+        require(from != address(0x0), "zero address");
+        _burn(from, amount);
     }
 
     ////////////////////////////////////////////////////////////////////////
     // Internal functions
     ////////////////////////////////////////////////////////////////////////
-    function _transfer(address _from, address _to, uint256 _amount) internal virtual override {
-        uint256 _transAmount = _amount;
-        if (isTaxTransable(_from)) {
-            uint256 taxAmount = super.calcTransFee(_amount);
-            transFee(_from, taxAmount);
-            _transAmount = _amount.sub(taxAmount);
+    function _transfer(address from, address to, uint256 amount) internal virtual override {
+        uint256 _transAmount = amount;
+        if (isTaxTransable(from)) {
+            uint256 taxAmount = super.calcTransFee(amount);
+            transFee(from, taxAmount);
+            _transAmount = amount.sub(taxAmount);
         }
-        super._transfer(_from, _to, _transAmount);
+        super._transfer(from, to, _transAmount);
     }    
 }

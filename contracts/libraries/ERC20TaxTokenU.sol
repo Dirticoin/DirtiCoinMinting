@@ -31,32 +31,30 @@ contract ERC20TaxTokenU  is ERC20Upgradeable, OwnableUpgradeable {
     ////////////////////////////////////////////////////////////////////////
     // Initialization functions
     ////////////////////////////////////////////////////////////////////////
-    function __TaxToken_init(TaxFee[] memory _taxFees) internal virtual initializer {
+    function TaxToken_init(TaxFee[] memory initTaxFees) internal virtual initializer {
         __Ownable_init();
 
         basisFeePoint = 10000;
         totalFeeRate = 0;
 
-        updateTaxFees(_taxFees);
+        updateTaxFees(initTaxFees);
     }
 
     ////////////////////////////////////////////////////////////////////////
     // External functions
     ////////////////////////////////////////////////////////////////////////
-    function updateTaxFees(TaxFee[] memory _taxFees) public onlyOwner {
+    function updateTaxFees(TaxFee[] memory newTaxFees) public onlyOwner {
         delete taxFees;
-        for (uint i=0; i<_taxFees.length; i++) {
-            taxFees.push(_taxFees[i]);
+        for (uint i=0; i<newTaxFees.length; i++) {
+            taxFees.push(newTaxFees[i]);
         }
         calcTotalFeeRate();
     }
 
-    function updateTaxFeeById(uint8 index, string memory name, address wallet, uint16 rate) public onlyOwner {
-        if (index == 255) {
-            taxFees.push(TaxFee(name, wallet, rate));
-        } else {
-            taxFees[index] = TaxFee(name, wallet, rate);
-        }
+    function updateTaxFeeById(uint8 index, string memory taxName, address taxWallet, uint16 taxRate) external onlyOwner {
+        require(index < taxFees.length, "The index is not valid");
+
+        taxFees[index] = TaxFee(taxName, taxWallet, taxRate);
         calcTotalFeeRate();
     }
 
@@ -97,5 +95,7 @@ contract ERC20TaxTokenU  is ERC20Upgradeable, OwnableUpgradeable {
             _totalFeeRate = _totalFeeRate + taxFees[i].rate;
         }
         totalFeeRate = _totalFeeRate;
+
+        require(totalFeeRate <= 2500, "The fee amount is not valid.");        
     }
 }
