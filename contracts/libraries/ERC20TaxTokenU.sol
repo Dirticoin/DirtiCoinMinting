@@ -3,16 +3,12 @@ pragma solidity 0.8.6;
 
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/utils/math/SafeMathUpgradeable.sol";
-// import "@openzeppelin/contracts/utils/math/Math.sol";
 
 contract ERC20TaxTokenU  is ERC20Upgradeable, OwnableUpgradeable {
-    using SafeMathUpgradeable for uint256;
-
     ////////////////////////////////////////////////////////////////////////
     // State variables
     ////////////////////////////////////////////////////////////////////////
-    uint16 public basisFeePoint;
+    uint16 private basisFeePoint;
     uint16 public totalFeeRate;
     struct TaxFee {
         string name;

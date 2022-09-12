@@ -2,12 +2,9 @@
 pragma solidity 0.8.6;
 
 import "@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/utils/math/SafeMathUpgradeable.sol";
 import "./libraries/ERC20TaxTokenU.sol";
 
 contract DIDToken is ERC20TaxTokenU {
-    using SafeMathUpgradeable for uint256;
-
     ////////////////////////////////////////////////////////////////////////
     // State variables
     ////////////////////////////////////////////////////////////////////////
@@ -55,7 +52,7 @@ contract DIDToken is ERC20TaxTokenU {
         if (isTaxTransable(from)) {
             uint256 taxAmount = super.calcTransFee(amount);
             transFee(from, taxAmount);
-            _transAmount = amount.sub(taxAmount);
+            _transAmount = amount - taxAmount;
         }
         super._transfer(from, to, _transAmount);
     }    
