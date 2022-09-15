@@ -18,12 +18,12 @@ contract DIDToken is ERC20TaxTokenU {
     ////////////////////////////////////////////////////////////////////////
 
     function initialize(
-        string memory name,
-        string memory symbol,
+        string memory tokenName,
+        string memory tokenSymbol,
         uint256 initialSupply,
         TaxFee[] memory initTaxFees
     ) public virtual initializer {
-        __ERC20_init(name, symbol);
+        __ERC20_init(tokenName, tokenSymbol);
         TaxToken_init(initTaxFees);
 
         _mint(_msgSender(), initialSupply);
@@ -32,12 +32,14 @@ contract DIDToken is ERC20TaxTokenU {
     ////////////////////////////////////////////////////////////////////////
     // External functions
     ////////////////////////////////////////////////////////////////////////
+    // The function to mint the token
     // The owner will be multi signature wallet such as gnosis
     function mint(address to, uint256 amount) external onlyOwner {
         require(to != address(0x0), "zero address");
         _mint(to, amount);
     }
     
+    // The function to burn the token
     // The owner will be multi signature wallet such as gnosis
     function burn(address from, uint256 amount) external onlyOwner {
         require(from != address(0x0), "zero address");
@@ -47,6 +49,8 @@ contract DIDToken is ERC20TaxTokenU {
     ////////////////////////////////////////////////////////////////////////
     // Internal functions
     ////////////////////////////////////////////////////////////////////////
+    // Token transfer middleware function
+    // This function will process the tax fee
     function _transfer(address from, address to, uint256 amount) internal virtual override {
         uint256 _transAmount = amount;
         if (isTaxTransable(from)) {
