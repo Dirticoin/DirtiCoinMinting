@@ -61,6 +61,11 @@ module.exports = {
       url: `https://ropsten.infura.io/v3/${INFURA_API_KEY}`,
       saveDeployments: true,
     },
+    goerli: {
+      ...sharedNetworkConfig,
+      url: `https://goerli.infura.io/v3/${INFURA_API_KEY}`,
+      saveDeployments: true,
+    },    
     ganache: {
       ...sharedNetworkConfig,
       url: "http://127.0.0.1:7545",
@@ -115,6 +120,7 @@ module.exports = {
       mainnet: ETHERSCAN_API_KEY,
       rinkeby: ETHERSCAN_API_KEY,
       ropsten: ETHERSCAN_API_KEY,
+      goerli: ETHERSCAN_API_KEY,
     },
   },
   namedAccounts: {

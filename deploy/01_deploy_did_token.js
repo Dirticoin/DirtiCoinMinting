@@ -33,3 +33,9 @@ const deployFunction = async ({ getNamedAccounts, deployments, ethers, upgrades 
 
 module.exports = deployFunction;
 module.exports.tags = [contractName];
+
+// npx hardhat deploy --network goerli --tags DIDToken
+
+// goerli: 0xA2f6048D47E01e69cb8e78b5F75f492e9112935B
+
+// npx hardhat verify --network goerli 0x7511682c57D0e12Aa5045F98D20f4Fab081CFFb9
