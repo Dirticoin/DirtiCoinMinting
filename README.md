@@ -1,4 +1,4 @@
-# DirtiCoin Smart Contracts v1
+# UREWPS Smart Contracts v1
 
 Repository is organized as follows:
 

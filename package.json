@@ -1,7 +1,7 @@
 {
   "name": "contracts-v1",
   "version": "1.0.0",
-  "description": "new experimental version of JoyStickDAO contracts",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "deploy:contracts:mainnet": "npx hardhat deploy --network mainnet --tags Export,$npm_config_tags",
@@ -13,17 +13,9 @@
     "test": "hardhat test",
     "coverage": "hardhat coverage"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JoyStickDAO/contracts-v1.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/JoyStickDAO/contracts-v2/issues"
-  },
-  "homepage": "https://github.com/JoyStickDAO/contracts-v2#readme",
   "devDependencies": {
     "@mstable/protocol": "^1.1.2",
     "@nomiclabs/hardhat-ethers": "^2.0.2",
